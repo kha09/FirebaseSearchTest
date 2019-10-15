@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivUsers"
+        android:layout_width="125dp"
+        android:layout_height="127dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="566dp"
+        app:srcCompat="@drawable/a4" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="130dp"
+        android:layout_height="29dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="135dp"
+        android:layout_marginBottom="642dp"
+        android:layout_toEndOf="@+id/ivUsers"
+        android:text="first name"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="200dp"
+        android:layout_height="46dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="71dp"
+        android:layout_marginBottom="583dp"
+        android:layout_toEndOf="@+id/ivUsers"
+        android:text="kdfnk nknknnskdnfnsn dnp pnsp ns"
+        android:textSize="18sp" />
+</RelativeLayout>
