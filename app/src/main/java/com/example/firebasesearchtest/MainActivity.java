@@ -1,5 +1,6 @@
 package com.example.firebasesearchtest;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull UsersViewHolder holder, int position, @NonNull Users model) {
-                holder.setDetails(model.getName(),model.getStatus(),model.getImage());
+                holder.setDetails(getApplicationContext(),model.getName(),model.getStatus(),model.getImage());
             }
 
 //            protected void populateViewHolder(UsersViewHolder viewHolder, Users model, int position){
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // View holder class
-    public class UsersViewHolder extends RecyclerView.ViewHolder{
+    public static class UsersViewHolder extends RecyclerView.ViewHolder{
         View mView;
 
         public UsersViewHolder(@NonNull View itemView) {
@@ -84,14 +85,14 @@ public class MainActivity extends AppCompatActivity {
 
             mView = itemView;
         }
-        public void setDetails(String userName, String userStatus, String userImage){
+        public void setDetails(Context ctx, String userName, String userStatus, String userImage){
             TextView user_name = mView.findViewById(R.id.tvName);
             TextView user_status = mView.findViewById(R.id.tvStatus);
             ImageView user_image = mView.findViewById(R.id.ivUsers);
             user_name.setText(userName);
             user_status.setText(userStatus);
 
-            Glide.with(getApplicationContext()).load(userImage).into(user_image);
+            Glide.with(ctx).load(userImage).into(user_image);
         }
 
     }
