@@ -2,12 +2,14 @@ package com.example.firebasesearchtest;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class MainActivity extends AppCompatActivity {
     private EditText etSearchField;
@@ -35,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         ibSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseUserSearch();
+                String searchText = etSearchField.getText().toString();
+                firebaseUserSearch(searchText);
             }
         });
     }
@@ -48,10 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void firebaseUserSearch() {
+    private void firebaseUserSearch(String searchText) {
+        Toast.makeText(MainActivity.this, "Started Search", Toast.LENGTH_SHORT).show();
+        Query query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
         FirebaseRecyclerOptions<Users> options =
                 new FirebaseRecyclerOptions.Builder<Users>()
-                        .setQuery(mUserDatabase, Users.class)
+                        .setQuery(query, Users.class)
                         .build();
 
         FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UsersViewHolder>(options) {
@@ -59,17 +65,18 @@ public class MainActivity extends AppCompatActivity {
             @NonNull
             @Override
             public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_layout, parent ,false);
 
-                return null;
+                return new UsersViewHolder(view);
             }
 
             @Override
             protected void onBindViewHolder(@NonNull UsersViewHolder holder, int position, @NonNull Users model) {
                 holder.setDetails(getApplicationContext(),model.getName(),model.getStatus(),model.getImage());
             }
-
+            
 //            protected void populateViewHolder(UsersViewHolder viewHolder, Users model, int position){
-//                viewHolder.setDetails(model.getName(),model.getStatus(),model.getImage());
+//                viewHolder.setDetails(getApplicationContext(),model.getName(),model.getStatus(),model.getImage());
 //            }
 
     };
