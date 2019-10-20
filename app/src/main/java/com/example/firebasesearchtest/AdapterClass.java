@@ -45,6 +45,10 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder
     public void onBindViewHolder(@NonNull AdapterClass.MyViewHolder holder, int position) {
         holder.name.setText(list.get(position).getName());
         holder.status.setText(list.get(position).getStatus());
+        String url;
+        url = list.get(position).getImage();
+        Glide.with(holder.imageView).load(url).into(holder.imageView);
+
     }
 
     @Override
