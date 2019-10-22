@@ -1,6 +1,8 @@
 package com.example.firebasesearchtest;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +21,13 @@ import java.util.ArrayList;
 public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder> {
     ArrayList<Users> list;
     Context context;
+    private AdapterView.OnItemClickListener mOnItemClickListener;
 
     public AdapterClass(ArrayList<Users> list){
         this.list = list;
     }
+
+
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         View mView;
@@ -35,9 +40,26 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder
             status = mView.findViewById(R.id.tvStatus);
             imageView = mView.findViewById(R.id.ivUsers);
 
+            itemVew.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("RecyclerView", "onClick：" + getAdapterPosition());
+                    Toast.makeText(mView.getContext(),"recycle" + getLayoutPosition(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mView.getContext(),"image" + getLayoutPosition(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
         }
 
-    }
+        }
+
+
 
     @NonNull
     @Override
@@ -47,25 +69,26 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterClass.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final AdapterClass.MyViewHolder holder, final int position) {
         holder.name.setText(list.get(position).getName());
         holder.status.setText(list.get(position).getStatus());
         String url;
         url = list.get(position).getImage();
         Glide.with(holder.imageView).load(url).into(holder.imageView);
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(),"one ", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
-
 
 
 
