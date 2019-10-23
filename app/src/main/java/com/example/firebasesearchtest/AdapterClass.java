@@ -1,6 +1,7 @@
 package com.example.firebasesearchtest;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,9 @@ import java.util.ArrayList;
 public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder> {
     ArrayList<Users> list;
     Context context;
+    UsersOptions usr = new UsersOptions();
+    String user2;
+
 
     public AdapterClass(ArrayList<Users> list){
         this.list = list;
@@ -28,15 +32,25 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder
         View mView;
         TextView name,status;
         ImageView imageView;
-        public MyViewHolder(View itemVew){
+        public MyViewHolder(View itemVew) {
             super(itemVew);
             mView = itemVew;
             name = mView.findViewById(R.id.tvName);
             status = mView.findViewById(R.id.tvStatus);
             imageView = mView.findViewById(R.id.ivUsers);
-
+            //imageView.setOnClick
+            //view click listener + getting name from Users class and add name to UsersOptions class
+//        mView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(mView.getContext(), name.getText(), Toast.LENGTH_SHORT).show();
+//                user2 = name.getText().toString();
+//                usr.setUserChoice(user2);
+//                Log.i("userChoice",user2);
+//
+//            }
+//        });
         }
-
     }
 
     @NonNull
@@ -53,21 +67,21 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder
         String url;
         url = list.get(position).getImage();
         Glide.with(holder.imageView).load(url).into(holder.imageView);
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(),"one ", Toast.LENGTH_SHORT).show();
-            }
-        });
+        // holder.imageView
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(view.getContext(), list.get(position).getName() +"  " +list.get(position).getStatus(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
-    @Override
-    public int getItemCount() {
-        return list.size();
+        @Override
+        public int getItemCount () {
+            return list.size();
+        }
+
+
     }
 
 
-
-
-
-}
