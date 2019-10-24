@@ -36,5 +36,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     implementation 'com.google.firebase:firebase-firestore:21.1.1'
     implementation 'com.google.firebase:firebase-core:17.0.0'
+    //Expandaple layout
+    implementation 'com.github.iammert:ExpandableLayout:1.4.1'
 
 }
