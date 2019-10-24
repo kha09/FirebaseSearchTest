@@ -1,6 +1,8 @@
 package com.example.firebasesearchtest;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,9 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder
     Context context;
     UsersOptions usr = new UsersOptions();
     String user2;
+    String user3;
+    public static String Tag2;
+    public static String Tag3;
 
 
     public AdapterClass(ArrayList<Users> list){
@@ -39,16 +44,19 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder
             imageView = mView.findViewById(R.id.ivUsers);
             //imageView.setOnClick
             //view click listener + getting name from Users class and add name to UsersOptions class
-//        mView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(mView.getContext(), name.getText(), Toast.LENGTH_SHORT).show();
-//                user2 = name.getText().toString();
-//                usr.setUserChoice(user2);
-//                Log.i("userChoice",user2);
-//
-//            }
-//        });
+        mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mView.getContext(), name.getText(), Toast.LENGTH_SHORT).show();
+                user2 = name.getText().toString();
+                user3 = status.getText().toString();
+                Log.i("userChoice",user2);
+                Tag2 = user2;
+                Tag3 = user3;
+                Intent intent = new Intent(mView.getContext(), UsersOption.class);
+                context.startActivity(intent);
+            }
+        });
         }
     }
 
@@ -56,6 +64,7 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_layout, parent, false);
+        context = parent.getContext();
         return new MyViewHolder(view);
     }
 
@@ -75,13 +84,12 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder
 //        });
     }
 
-    @Override
-    public int getItemCount() {
-        return list.size();
+        @Override
+        public int getItemCount () {
+            return list.size();
+        }
+
+
     }
 
 
-
-
-
-}
