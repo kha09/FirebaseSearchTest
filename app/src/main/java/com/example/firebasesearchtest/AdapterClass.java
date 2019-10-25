@@ -50,13 +50,13 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder
                 user3 = status.getText().toString();
                 Log.i("userChoice",user2);
                 //use intent. putExtras to pass values to new activity, shared tag strings has a high risk;
-                Tag2 = user2;
-                Tag3 = user3;
+//                Tag2 = user2;
+//                Tag3 = user3;
 
 
                 Intent intent = new Intent(mView.getContext(), UsersOption.class);
-                //intent.putExtra(ARG_PARAM1, param1);
-                //intent.putExtra(ARG_PARAM2, param2);
+                intent.putExtra("Tag1", user2);
+                intent.putExtra("Tag2", user3);
                 context.startActivity(intent);
             }
         });
